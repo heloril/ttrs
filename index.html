@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triathlete List</title>
+</head>
+<body>
+    <h1>Triathlete List</h1>
+    
+    <form id="triathleteForm">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" required>
+        
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" required>
+        
+        <label for="birthdate">Birthdate:</label>
+        <input type="date" id="birthdate" name="birthdate">
+        
+        <button type="submit">Save</button>
+    </form>
+    
+    <h2>Triathlete List</h2>
+    <ul id="triathleteList"></ul>
+    
+    <script>
+        const triathleteForm = document.getElementById('triathleteForm');
+        const triathleteList = document.getElementById('triathleteList');
+        
+        // Load stored data on page load
+        window.addEventListener('load', function() {
+            const storedTriathletes = JSON.parse(localStorage.getItem('triathletes')) || [];
+            
+            for (const triathlete of storedTriathletes) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${triathlete.firstname} ${triathlete.lastname}`;
+                triathleteList.appendChild(listItem);
+            }
+        });
+        
+        triathleteForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const firstname = document.getElementById('firstname').value;
+            const lastname = document.getElementById('lastname').value;
+            const birthdate = document.getElementById('birthdate').value;
+            
+            const triathlete = {
+                firstname: firstname,
+                lastname: lastname,
+                birthdate: birthdate
+            };
+            
+            // Load existing data and add new triathlete
+            const storedTriathletes = JSON.parse(localStorage.getItem('triathletes')) || [];
+            storedTriathletes.push(triathlete);
+            
+            localStorage.setItem('triathletes', JSON.stringify(storedTriathletes));
+            
+            const listItem = document.createElement('li');
+            listItem.textContent = `${triathlete.firstname} ${triathlete.lastname}`;
+            triathleteList.appendChild(listItem);
+            
+            triathleteForm.reset();
+        });
+    </script>
+</body>
+</html>
