@@ -94,6 +94,7 @@
 
     // Handle form submission
     const triathleteForm = document.getElementById('triathleteForm');
+    triathleteForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
         const firstname = document.getElementById('firstname').value;
