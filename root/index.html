@@ -24,51 +24,6 @@
     <h2>Triathlete List</h2>
     <ul id="triathleteList"></ul>
     
-    <script>
-        const triathleteForm = document.getElementById('triathleteForm');
-        const triathleteList = document.getElementById('triathleteList');
-        
-        // Load stored data on page load
-        window.addEventListener('load', function() {
-            const storedTriathletes = JSON.parse(localStorage.getItem('triathletes')) || [];
-            
-            for (const triathlete of storedTriathletes) {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${triathlete.firstname} ${triathlete.lastname}`;
-                triathleteList.appendChild(listItem);
-            }
-        });
-        
-        triathleteForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const firstname = document.getElementById('firstname').value;
-            const lastname = document.getElementById('lastname').value;
-            const birthdate = document.getElementById('birthdate').value;
-            
-            const triathlete = {
-                firstname: firstname,
-                lastname: lastname,
-                birthdate: birthdate
-            };
-            
-            // Load existing data and add new triathlete
-            const storedTriathletes = JSON.parse(localStorage.getItem('triathletes')) || [];
-            storedTriathletes.push(triathlete);
-            
-            localStorage.setItem('triathletes', JSON.stringify(storedTriathletes));
-            
-            const listItem = document.createElement('li');
-            listItem.textContent = `${triathlete.firstname} ${triathlete.lastname}`;
-            triathleteList.appendChild(listItem);
-            
-            triathleteForm.reset();
-        });
-    </script>
-	
-	<!-- Include Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
 
 <script>
 <script type="module">
